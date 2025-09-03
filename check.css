@@ -1,0 +1,197 @@
+:root {
+    --background: #f3f4f6;
+    --primary-color: #ffffff;
+    --secondary-color: #c0c0c0;
+    --accent-color: #2563EB;
+    --hover-color: #1D4ED8;
+    --text-color: #000000;
+    --font-family: Arial, sans-serif;
+    --font-size: 16px;
+}
+
+:root.dark-theme {
+    --background: #111827;
+    --primary-color: #1F2937;
+    --secondary-color: #9CA3AF;
+    --accent-color: #6366F1;
+    --hover-color: #4F46E5;
+    --text-color: #F9FAFB;
+}
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+html{
+    font-family: var(--font-family);
+    font-size: 16px;
+    color: var(--text-color);
+}
+body{
+    min-height: 100vh;
+    padding: 100px;
+    background: var(--background);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: background 0.5s ease-in-out;
+}
+h1{
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--accent-color);
+}
+.wrapper{
+    width: 100%;
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+#things-input{
+    box-sizing: border-box;
+    padding: 12px 20px;
+    width: 100%;
+    background-color: var(--primary-color);
+    font: inherit;
+    border: 2px solid var(--secondary-color);
+    border-radius: 1000px;
+    color: var(--text-color);
+    caret-color: var(--accent-color);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.226);
+    flex-grow: 1;
+    transition: all 0.5s ease-in-out;
+}
+#things-input:focus{
+    outline: none;
+}
+#add-button{
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+    border: none;
+    border-radius: 1000px;
+    padding: 12px 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.226);
+    transition: all 0.3s ease;
+}
+#add-button:hover{
+    background-color: var(--hover-color);
+}
+form{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.todo{
+    margin-bottom: 10px;
+    padding: 0px 16px;
+    background-color: var(--primary-color);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.226);
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    transition: all 0.5s ease-in-out;
+}
+.todo .todo-text{
+    padding-right: 0;
+    padding: 15px;
+    flex-grow: 1;
+    transition: 100ms ease;
+}
+.remove-button{
+    padding: 3px;
+    background: none;
+    border: none;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    cursor: pointer;
+}
+.remove-button svg{
+    transition: 100ms ease;
+    fill: var(--secondary-color);
+}
+.remove-button:hover svg{
+    fill: var(--accent-color);
+}
+.custom-checkbox{
+    min-width: 24px;
+    min-height: 24px;
+    border: 2px solid var(--secondary-color);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 100ms ease;
+    flex-shrink: 0;
+}
+input[type="checkbox"]:checked ~ .custom-checkbox {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+input[type="checkbox"]:checked ~ .custom-checkbox svg{
+    fill: var(--secondary-color);
+}
+input[type="checkbox"]:checked ~ .todo-text{
+    text-decoration: line-through;
+    color: var(--secondary-color);
+}
+input[type="checkbox"]{
+    display: none;
+}
+
+.dark-mode-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    color: var(--text-color);
+    cursor: pointer;
+    font-size: 14px;
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    transition: all 0.5s ease-in-out;
+}
+
+.dark-mode-toggle input[type="checkbox"] {
+    display: none;
+}
+
+.dark-mode-toggle svg path {
+    fill: var(--text-color);
+    transition: fill 0.5s ease-in-out;
+}
+
+/* --- Responsive Layout --- */
+@media (max-width: 600px) {
+    form {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    #things-input {
+        margin-bottom: 10px;
+    }
+
+    #add-button {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    body {
+        padding: 50px 20px;
+    }
+
+    .dark-mode-toggle {
+        top: 20px;
+        right: 20px;
+    }
+}
