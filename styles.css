@@ -5,8 +5,18 @@
     --accent-color: #2563EB;
     --hover-color: #1D4ED8;
     --text-color: #000000;
+    --theme-color: #cccccc;
     --font-family: Arial, sans-serif;
     --font-size: 16px;
+}
+.darkmode {
+    --background: #111827;
+    --primary-color: #1F2937;
+    --secondary-color: #9CA3AF;
+    --accent-color: #6366F1;
+    --hover-color: #4F46E5;
+    --text-color: #F9FAFB;
+    --theme-color: #202a41;
 }
 *{
     box-sizing: border-box;
@@ -25,6 +35,33 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+#theme-toggle{
+    height: 50px;
+    width: 50px;
+    padding: 0;
+    position: fixed;
+    border: none;
+    background: var(--theme-color);
+    border-radius: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    top: 20px;
+    right: 20px;
+}
+#theme-toggle svg{
+    fill: var(--text-color);
+}
+#theme-toggle svg:last-child{
+    display: none;
+}
+.darkmode #theme-toggle svg:first-child{
+    display: none;
+}
+.darkmode #theme-toggle svg:last-child{
+    display: block;
 }
 h1{
     font-size: 2.5rem;
@@ -79,6 +116,7 @@ h1{
 form{
     /*position: relative;*/
     display: flex;
+    margin-bottom: 5px;
     align-items: center;
     gap: 1rem;
 }
@@ -86,6 +124,7 @@ form{
     margin-bottom: 10px;
     padding: 0px 16px;
     background-color: var(--primary-color);
+    color: var(--text-color);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.226);
     border-radius: 50px;
     display: flex;

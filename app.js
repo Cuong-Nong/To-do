@@ -1,6 +1,9 @@
 const todoForm = document.querySelector('form');
 const todoInput = document.getElementById('things-input');
 const todoListUL = document.getElementById('todo-list');
+// Darkmode
+const themeToggle = document.getElementById("theme-toggle");
+const body = document.body;
 
 let allTodos = getTodos();
 updateTodoList();
@@ -71,3 +74,18 @@ function getTodos() {
     const todos = localStorage.getItem("todos") || "[]";
     return JSON.parse(todos);
 }
+
+// Darkmode
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'dark') {
+    document.body.classList.add('darkmode');
+}
+
+themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('darkmode');
+    if (document.body.classList.contains('darkmode')) {
+        localStorage.setItem('theme', 'dark');
+    } else {
+        localStorage.setItem('theme', 'light');
+    }
+});

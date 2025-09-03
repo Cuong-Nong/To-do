@@ -9,7 +9,7 @@
     --font-size: 16px;
 }
 
-:root.dark-theme {
+.dark-mode-toggle {
     --background: #111827;
     --primary-color: #1F2937;
     --secondary-color: #9CA3AF;
