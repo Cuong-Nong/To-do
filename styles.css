@@ -18,6 +18,45 @@
     --text-color: #F9FAFB;
     --theme-color: #202a41;
 }
+/* animation */
+@keyframes appear {
+    from {
+        opacity: 0;
+        scale: 0.9;
+    }
+    to {
+        opacity: 1;
+        scale: 1;
+    }
+}
+@keyframes disappear {
+    from {
+        opacity: 1;
+        scale: 1;
+    }
+    to {
+        opacity: 0;
+        scale: 0.9;
+    }
+}
+
+.todo {
+    animation: appear linear;
+    animation-timeline: view();
+    animation-range: entry 0% cover 10%;
+}
+.new-todo {
+    animation: appear 0.3s ease-out;
+}
+.fade-out {
+    animation: disappear 0.3s ease-in forwards;
+}
+.todo.slide-up {
+    transition: transform 0.25s;
+    transform: translateY(-63px);
+}
+
+
 *{
     box-sizing: border-box;
     margin: 0;
@@ -150,6 +189,33 @@ form{
     flex-grow: 1;
     transition: 100ms ease;
 }
+.edit-button{
+    padding: 3px;
+    background: none;
+    border: none;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    cursor: pointer;
+}
+.edit-button svg{
+    transition: 100ms ease;
+}
+.edit-button:hover svg{
+    fill: var(--accent-color);
+}
+.edit-input {
+    font: inherit;
+    padding: 15px 15px;
+    border-radius: 50px;
+    width: 100%;
+    flex-grow: 1;
+    margin-right: 10px;
+}
+.edit-input:focus{
+    outline: none;
+    border: none;
+}
 .remove-button{
     padding: 3px;
     background: none;
@@ -207,43 +273,13 @@ input[type="checkbox"]{
     body {
         padding: 50px 20px;
     }
-}
-
-/* animation */
-@keyframes appear {
-    from {
-        opacity: 0;
-        scale: 0.9;
+    .todo.slide-up {
+        transform: translateY(-58px); 
     }
-    to {
-        opacity: 1;
-        scale: 1;
+    #theme-toggle {
+        height: 45px;
+        width: 45px;
+        top: 15px;
+        right: 15px;
     }
-}
-@keyframes disappear {
-    from {
-        opacity: 1;
-        scale: 1;
-    }
-    to {
-        opacity: 0;
-        scale: 0.9;
-    }
-}
-
-.todo {
-    animation: appear linear;
-    animation-timeline: view();
-    animation-range: entry 0% cover 10%;
-}
-.new-todo {
-    animation: appear 0.3s ease-out;
-}
-.fade-out {
-    animation: disappear 0.3s ease-in forwards;
-}
-/* Hiệu ứng trượt lên cho các todo phía dưới */
-.todo.slide-up {
-    transition: transform 0.25s;
-    transform: translateY(-63px); /* hoặc chiều cao của 1 todo */
 }
