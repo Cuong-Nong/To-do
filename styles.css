@@ -207,6 +207,8 @@ form{
 .edit-input {
     font: inherit;
     padding: 15px 15px;
+    background-color: var(--primary-color);
+    color: var(--text-color);
     border-radius: 50px;
     width: 100%;
     flex-grow: 1;
