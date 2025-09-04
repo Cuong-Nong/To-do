@@ -4,6 +4,7 @@ const todoListUL = document.getElementById('todo-list');
 // Darkmode
 const themeToggle = document.getElementById("theme-toggle");
 const body = document.body;
+const emptyMessage = document.getElementById('empty-message');
 
 let allTodos = getTodos();
 updateTodoList();
@@ -27,10 +28,15 @@ function addTodo() {
 }
 function updateTodoList(){
     todoListUL.innerHTML = "";
-    allTodos.forEach((todo, todoIndex) => {
-        todoItem = createTodoItem(todo, todoIndex);
-        todoListUL.append(todoItem);
-    });
+    if (allTodos.length === 0) {
+        emptyMessage.classList.remove('hidden');
+    } else {
+        emptyMessage.classList.add('hidden');
+        allTodos.forEach((todo, todoIndex) => {
+            const todoItem = createTodoItem(todo, todoIndex);
+            todoListUL.append(todoItem);
+        });
+    }
 }
 function createTodoItem(todo, todoIndex) {
     const todoId = "todo-"+todoIndex;
@@ -48,7 +54,7 @@ function createTodoItem(todo, todoIndex) {
         <button class="remove-button">
             <svg fill="var(--secondary-color)"xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
         </button>
-    `
+    `;
     const removeButton = todoLI.querySelector(".remove-button");
     removeButton.addEventListener("click", () => {
         removeTodoItem(todoIndex);
@@ -62,9 +68,13 @@ function createTodoItem(todo, todoIndex) {
     return todoLI;
 }
 function removeTodoItem(todoIndex) {
-    allTodos = allTodos.filter((_, i) => i !== todoIndex);
-    saveTodos();
-    updateTodoList();
+    const todoItem = todoListUL.children[todoIndex];
+    todoItem.classList.add('fade-out');
+    todoItem.addEventListener('animationend', () => {
+        allTodos = allTodos.filter((_, i) => i !== todoIndex);
+        saveTodos();
+        updateTodoList();
+    }, { once: true });
 }
 function saveTodos() {
     const todoJson = JSON.stringify(allTodos);
