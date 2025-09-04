@@ -1,8 +1,7 @@
 const todoForm = document.querySelector('form');
 const todoInput = document.getElementById('things-input');
 const todoListUL = document.getElementById('todo-list');
-// Darkmode
-const themeToggle = document.getElementById("theme-toggle");
+/* Darkmode*/ const themeToggle = document.getElementById("theme-toggle");
 const body = document.body;
 const emptyMessage = document.getElementById('empty-message');
 
@@ -21,7 +20,7 @@ function addTodo() {
             completed: false
         }
         allTodos.push(todoObj);
-        updateTodoList();
+        renderNewTodo(todoObj, allTodos.length - 1);
         saveTodos();
         todoInput.value = '';
     }
@@ -37,6 +36,12 @@ function updateTodoList(){
             todoListUL.append(todoItem);
         });
     }
+}
+function renderNewTodo(todo, todoIndex) {
+    const todoItem = createTodoItem(todo, todoIndex);
+    todoItem.classList.add('new-todo');
+    todoListUL.append(todoItem);
+    emptyMessage.classList.add('hidden');
 }
 function createTodoItem(todo, todoIndex) {
     const todoId = "todo-"+todoIndex;
@@ -70,10 +75,15 @@ function createTodoItem(todo, todoIndex) {
 function removeTodoItem(todoIndex) {
     const todoItem = todoListUL.children[todoIndex];
     todoItem.classList.add('fade-out');
+
+    for (let i = todoIndex + 1; i < todoListUL.children.length; i++) {
+        todoListUL.children[i].classList.add('slide-up');
+    }
+
     todoItem.addEventListener('animationend', () => {
-        allTodos = allTodos.filter((_, i) => i !== todoIndex);
-        saveTodos();
-        updateTodoList();
+            allTodos = allTodos.filter((_, i) => i !== todoIndex);
+            saveTodos();
+            updateTodoList();
     }, { once: true });
 }
 function saveTodos() {

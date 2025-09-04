@@ -235,8 +235,15 @@ input[type="checkbox"]{
     animation: appear linear;
     animation-timeline: view();
     animation-range: entry 0% cover 10%;
-    animation: appear 0.4s ease-out;
+}
+.new-todo {
+    animation: appear 0.3s ease-out;
 }
 .fade-out {
     animation: disappear 0.3s ease-in forwards;
+}
+/* Hiệu ứng trượt lên cho các todo phía dưới */
+.todo.slide-up {
+    transition: transform 0.25s;
+    transform: translateY(-63px); /* hoặc chiều cao của 1 todo */
 }
