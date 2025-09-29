@@ -1,24 +1,28 @@
 :root {
-    --background: #f3f4f6;
-    --primary-color: #ffffff;
-    --secondary-color: #c0c0c0;
-    --accent-color: #2563EB;
-    --hover-color: #1D4ED8;
-    --text-color: #000000;
-    --theme-color: #cccccc;
+    --color-bg: #f3f4f6;                /* Nền tổng thể */
+    --color-surface: #ffffff;           /* Nền các thành phần nổi */
+    --color-border: #c0c0c0;            /* Viền */
+    --color-primary: #2563EB;           /* Màu chính (nút, tiêu đề) */
+    --color-primary-hover: #1D4ED8;     /* Màu khi hover nút */
+    --color-text: #000000;              /* Màu chữ chính */
+    --color-icon-muted: #b0b0b0;        /* Màu xám nhạt cho icon */
+    --color-muted: #cccccc;             /* Màu nền phụ, các thành phần nhỏ */
+    --color-hover: #e5e7eb;             /* Màu khi hover các thành phần nhỏ */
     --font-family: Arial, sans-serif;
     --font-size: 20px;
 }
 .darkmode {
-    --background: #111827;
-    --primary-color: #1F2937;
-    --secondary-color: #9CA3AF;
-    --accent-color: #6366F1;
-    --hover-color: #4F46E5;
-    --text-color: #F9FAFB;
-    --theme-color: #202a41;
+    --color-bg: #111827;
+    --color-surface: #1F2937;
+    --color-border: #9CA3AF;
+    --color-primary: #6366F1;
+    --color-primary-hover: #4F46E5;
+    --color-text: #F9FAFB;
+    --color-muted: #202a41;
+    --color-hover: #4B5563;
+    --color-icon-muted: #6b7280; /* xám nhạt darkmode */
 }
-/* animation */
+/* animation todo*/
 @keyframes appear {
     from {
         opacity: 0;
@@ -55,7 +59,7 @@
     transition: transform 0.25s;
     transform: translateY(-63px);
 }
-
+/* animation todo*/
 
 *{
     box-sizing: border-box;
@@ -65,15 +69,21 @@
 html{
     font-family: var(--font-family);
     font-size: var(--font-size);
-    color: var(--text-color);
+    color: var(--color-text);
 }
 body{
     min-height: 100vh;
-    padding: 100px;
-    background: var(--background);
+    display: block;
+}
+
+main {
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    min-height: 100vh;
+    padding: 100px;
+    background: var(--color-bg);
 }
 #theme-toggle{
     height: 50px;
@@ -81,7 +91,7 @@ body{
     padding: 0;
     position: fixed;
     border: none;
-    background: var(--theme-color);
+    background: var(--color-muted);
     border-radius: 500px;
     display: flex;
     align-items: center;
@@ -91,15 +101,18 @@ body{
     right: 20px;
 }
 #theme-toggle svg{
-    fill: var(--text-color);
+    fill: var(--color-text);
 }
-#theme-toggle svg:last-child{
+#theme-toggle .icon-light {
+    display: block;
+}
+#theme-toggle .icon-dark {
     display: none;
 }
-.darkmode #theme-toggle svg:first-child{
+.darkmode #theme-toggle .icon-light {
     display: none;
 }
-.darkmode #theme-toggle svg:last-child{
+.darkmode #theme-toggle .icon-dark {
     display: block;
 }
 h1{
@@ -109,7 +122,7 @@ h1{
     margin-bottom: 30px;
     /* text-transform: uppercase; */
     text-align: center;
-    color: var(--accent-color);
+    color: var(--color-primary);
 }
 .wrapper{
     width: 100%;
@@ -122,12 +135,12 @@ h1{
     box-sizing: border-box;
     padding: 12px 20px;
     width: 100%;
-    background-color: var(--primary-color);
+    background-color: var(--color-surface);
     font: inherit;
-    border: 2px solid var(--secondary-color);
+    border: 2px solid var(--color-border);
     border-radius: 1000px;
-    color: var(--text-color);
-    caret-color: var(--accent-color);
+    color: var(--color-text);
+    caret-color: var(--color-primary);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.226);
     flex-grow: 1;
     transition: 100ms ease;
@@ -140,8 +153,8 @@ h1{
     top: 0;
     right: 0;
     height: 100%;*/
-    background-color: var(--accent-color);
-    color: var(--primary-color);
+    background-color: var(--color-primary);
+    color: var(--color-surface);
     border: none;
     border-radius: 1000px;
     padding: 16px 20px;
@@ -151,7 +164,7 @@ h1{
     transition: 100ms ease;
 }
 #add-button:hover{
-    background-color: var(--hover-color);
+    background-color: var(--color-primary-hover);
 }
 form{
     /*position: relative;*/
@@ -162,7 +175,7 @@ form{
 }
 #empty-message {
     text-align: center;
-    color: var(--secondary-color);
+    color: var(--color-border);
     font-size: 1.2rem;
     font-style: italic;
     margin-top: 20px;
@@ -170,14 +183,13 @@ form{
 }
 #empty-message.hidden {
     display: none;
-    opacity: 0;
 }
 
 .todo{
     margin-bottom: 10px;
     padding: 0px 16px;
-    background-color: var(--primary-color);
-    color: var(--text-color);
+    background-color: var(--color-surface);
+    color: var(--color-text);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.226);
     border-radius: 50px;
     display: flex;
@@ -202,13 +214,13 @@ form{
     transition: 100ms ease;
 }
 .edit-button:hover svg{
-    fill: var(--accent-color);
+    fill: var(--color-primary);
 }
 .edit-input {
     font: inherit;
     padding: 15px 15px;
-    background-color: var(--primary-color);
-    color: var(--text-color);
+    background-color: var(--color-surface);
+    color: var(--color-text);
     border-radius: 50px;
     width: 100%;
     flex-grow: 1;
@@ -231,12 +243,12 @@ form{
     transition: 100ms ease;
 }
 .remove-button:hover svg{
-    fill: var(--accent-color);
+    fill: var(--color-primary);
 }
 .custom-checkbox{
     min-width: 24px;
     min-height: 24px;
-    border: 2px solid var(--secondary-color);
+    border: 2px solid var(--color-border);
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -246,15 +258,15 @@ form{
     flex-shrink: 0;
 }
 input[type="checkbox"]:checked ~ .custom-checkbox {
-    background-color: var(--accent-color);
-    border-color: var(--accent-color);
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
 }
 input[type="checkbox"]:checked ~ .custom-checkbox svg{
-    fill: var(--secondary-color);
+    fill: var(--color-border);
 }
 input[type="checkbox"]:checked ~ .todo-text{
     text-decoration: line-through;
-    color: var(--secondary-color);
+    color: var(--color-border);
 }
 input[type="checkbox"]{
     display: none;
@@ -284,4 +296,9 @@ input[type="checkbox"]{
         top: 15px;
         right: 15px;
     }
+}
+
+/* Kéo thả */
+.todo.dragging {
+    opacity: 0.75;
 }
